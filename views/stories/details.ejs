@@ -1,0 +1,57 @@
+<!-- GET /stories/id : Presents the title and body of a single story. -->
+
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+<body>
+    <% const links = [{link: "/", text: 'Home Page'},
+    {link: "/about", text: 'About Page'},
+    {link: "/stories/create", text: 'New Story'}] %>
+
+    <%- include('../partials/nav.ejs', {headline: "Details", subtitle: "Enjoy reading :)", links}) %>
+
+    <div class="details content">
+        <h2><%= story.title %></h2>
+        <div class="content">
+            <p><%- story.body.replaceAll(/\r\n/g, '<br>') %></p>
+        </div>
+        <a class="delete" data-doc="<%= story._id %>">
+            <img src="/trashcan.svg" alt="delete icon">
+        </a>
+        <a class="edit" data-doc="<%= story._id %>">
+            <img src="/edit.svg" alt="edit icon">
+        </a>
+    </div>
+
+    <%- include("../partials/footer.ejs") %>
+
+    <script>
+        function set_click_event(button, urlBase, callback) {
+            button.addEventListener('click', event => {
+                const endpoint = `${urlBase}/${button.dataset.doc}`;
+
+                callback(endpoint);
+            });
+        }
+
+        // Setup the delete button:
+        const trashcan = document.querySelector('a.delete');
+        set_click_event(trashcan, '/stories', function (endpoint) {
+            // Send a request to the server and expect a response from the server, as a Promise return:
+            fetch(endpoint, {
+                method: 'DELETE',
+            })
+                .then((response) => response.json())
+                .then(dataJson => window.location.href = dataJson.redirect)
+                .catch(error => console.log(error));
+        });
+
+        // Setup the edit button:
+        const pencil = document.querySelector('a.edit');
+        set_click_event(pencil, '/stories/edit', function (endpoint) {
+            window.location.href = endpoint;
+        });
+    </script>
+
+</body>
+</html>

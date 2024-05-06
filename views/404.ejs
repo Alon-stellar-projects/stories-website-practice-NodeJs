@@ -1,0 +1,15 @@
+<!-- 404 Page not found. -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <%- include('./partials/nav.ejs', {headline: "404 - OOPS!", subtitle: null, links: []}) %>
+
+    <div class="not-found content">
+        <h2>The requested page is not found :(</h2>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

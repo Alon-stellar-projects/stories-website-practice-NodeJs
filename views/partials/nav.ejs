@@ -1,0 +1,15 @@
+<!-- A navigation ruler for pages in the website. -->
+
+<nav>
+    <div class="site-title">
+        <a href="/"><h1>Epic Stories</h1></a>
+        <h3><%= headline %></h3>
+        <% if(subtitle) %>
+        <p><%= subtitle %></p>
+    </div>
+    <ul>
+        <% links.forEach(link => { %>
+        <li><a href="<%= link.link %>"><%= link.text %></a></li>
+        <% }) %>
+    </ul>
+</nav>

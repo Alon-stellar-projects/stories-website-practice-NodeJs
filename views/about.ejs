@@ -1,0 +1,31 @@
+<!-- GET /about : The about us page. -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <% const links = [{link: "/", text: 'Home Page'},
+    {link: "/stories/create", text: 'New Story'}] %>
+
+    <%- include('./partials/nav.ejs', {headline: "About", subtitle: "This is the about page.", links}) %>
+    <!--<nav>
+        <div class="site-title">
+            <a href="/"><h1>About</h1></a>
+            <p>This is the about page.</p>
+        </div>
+        <ul>
+            <li><a href="/">Home Page</a></li>
+            <li><a href="/stories/create">New Story</a></li>
+        </ul>
+    </nav>-->
+
+    <div class="about content">
+        <h2>About Us:</h2>
+        <p>We like memes.</p>
+        <p>We also like ice-creams.</p>
+        <p>But particularly, we like telling you about how the first Orcs came to be. They were once elves...</p>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

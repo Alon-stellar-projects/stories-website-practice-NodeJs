@@ -1,0 +1,31 @@
+<!-- GET /create : A form for creating a new story. -->
+
+<html lang="en">
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <% const links = [{link: "/", text: 'Home Page'},
+    {link: "/about", text: 'About Page'}] %>
+
+    <%- include('../partials/nav.ejs', {headline: "Create a Story", subtitle: "Here we can create new stories.", links}) %>
+
+    <div class="create-story content">
+        <h2>Submit a new story</h2>
+
+        <form action="/stories" method="POST">
+            <!-- Hidden field to indicate PUT request -->
+            <input type="hidden" name="_method" value="POST">
+
+            <label for="title">Story title:</label>
+            <input type="text" id="title" name="title" required>
+            <label for="snippet">Story snippet:</label>
+            <input type="text" id="snippet" name="snippet" required>
+            <label for="body">Story body:</label>
+            <textarea id="body" name="body" required></textarea>
+            <button>Submit</button>
+        </form>
+    </div>
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

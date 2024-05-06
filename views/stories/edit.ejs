@@ -1,0 +1,38 @@
+<!-- GET /stories/edit/id : A form for edditing a single story. -->
+
+<html lang="en">
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <%- include('../partials/nav.ejs', {headline: "Edit a Story", subtitle: "", links: []}) %>
+
+    <div class="edit-story content">
+        <h2>Edit the story here:</h2>
+
+        <form action="/stories" method="POST">
+            <!-- Hidden field to indicate PUT request -->
+            <input type="hidden" name="_method" value="PUT">
+            <!-- Hidden field to store post ID -->
+            <input type="hidden" name="_id" value="<%= story._id %>">
+
+            <label for="title">Story title:</label>
+            <input type="text" id="title" name="title" required value="<%= story.title %>">
+            <label for="snippet">Story snippet:</label>
+            <input type="text" id="snippet" name="snippet" required value="<%= story.snippet %>">
+            <label for="body">Story body:</label>
+            <textarea id="body" name="body" required><%= story.body %></textarea>
+
+            <button type="submit" id="save" name="save">Save Changes</button>
+            <button type="button" id="cancel" onclick="cancelEdit()">Cancel</button>
+        </form>
+
+        <script>
+            function cancelEdit() {
+                window.location.href = '/stories';
+            }
+        </script>
+    </div>
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>
